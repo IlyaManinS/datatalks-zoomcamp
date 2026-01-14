@@ -1,5 +1,5 @@
 # Start with slim Python 3.13 image
-FROM python:3.13
+FROM python:3.13.11-slim
 
 # RUN pip install pandas pyarrow
 
@@ -19,8 +19,8 @@ COPY "pyproject.toml" "uv.lock" ".python-version" ./
 RUN uv sync --locked
 
 # Copy application code
-COPY pipeline.py pipeline.py
+COPY ingest_data.py
 
 # define what to do first when the container runs
 # in this example, we will just run the script
-ENTRYPOINT ["python", "pipeline.py"]
+ENTRYPOINT ["python", "ingest_data.py"]
