@@ -1,5 +1,5 @@
 # Start with slim Python 3.13 image
-FROM python:3.13.11-slim
+FROM python:3.13
 
 # RUN pip install pandas pyarrow
 
