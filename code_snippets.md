@@ -8,6 +8,10 @@
 <!-- docker run -it python:3.13.11 - to run it with python (unless, needs to be installed every time) -->
 <!-- docker run -it python:3.13.11-slim to install the lighter version -->
 
+<!-- run jupyter -->
+uv run jupyter notebook
+
+
 <!-- bash input -->
 docker run -it --entrypoint=bash python:3.13.11-slim
 
