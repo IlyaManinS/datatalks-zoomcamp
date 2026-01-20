@@ -1,0 +1,40 @@
+// Created this file as it was suggested by AI this is the standard approach in creating repos
+
+{
+  "name": "DE Zoomcamp 2026",
+  
+  // Match Zoomcamp's Python 3.13
+  "image": "mcr.microsoft.com/devcontainers/python:3.13-bookworm",
+  
+  "features": {
+    // Latest Terraform
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest"
+    },
+    // Docker-in-Docker for running containers
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest"
+    },
+    // GitHub CLI
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  
+  // Install packages directly + from requirements.txt if it exists
+  "postCreateCommand": "pip install pandas sqlalchemy psycopg2-binary pyarrow click && (pip install -r requirements.txt || echo 'No requirements.txt found')",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "hashicorp.terraform",
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  },
+  
+  // Forward Postgres and pgAdmin ports
+  "forwardPorts": [5432, 8080],
+  
+  "remoteUser": "vscode"
+}
