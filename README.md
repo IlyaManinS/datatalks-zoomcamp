@@ -36,12 +36,13 @@ SELECT "Zone", ROUND(SUM(total_amount)::numeric,2) as zone_total,
 RANK() OVER (ORDER BY SUM(total_amount) DESC) as zone_rank  
 FROM public.green_taxi_trips t  
 INNER JOIN public.taxi_zones z  
-ON t."PULocationID" = z."LocationID"  
+ON t."PULocationID" = z."LocationID" 
+WHERE lpep_pickup_datetime BETWEEN '2025-11-18 00:00:00' AND '2025-11-18 23:59:59'
 GROUP BY "Zone"  
 )  
 SELECT "Zone", zone_total  
 FROM ranked_zones  
-WHERE zone_rank = 1  
+WHERE zone_rank = 1 
 
 
 Answer: East Harlem North
@@ -49,27 +50,20 @@ Answer: East Harlem North
 
 <h3> Question 6 </h3>
 
--- this is the most "readable" version where we don't know the ID of the east harlem north zone.   
--- you can run in a separate query to get the name of the location and have one CTE with PULocationID = {id}  
 -- again, using a CTE in case there are multiple zones with the same maximum tip  
 
-
-WITH east_harlem_north_trips AS  
+WITH ranked_drop_offs AS  
 (  
-SELECT t.*  
-FROM public.green_taxi_trips t  
-INNER JOIN public.taxi_zones z  
-ON t."PULocationID" = z."LocationID"  
-WHERE "Zone" = 'East Harlem North'  
-)  
-, ranked_drop_offs AS  
-(  
-SELECT "Zone", MAX(tip_amount) as max_amount,  
+SELECT dropoff."Zone", MAX(tip_amount) as max_amount,  
 RANK() OVER (ORDER BY MAX(tip_amount) DESC) as zone_rank  
-FROM east_harlem_north_trips t  
-INNER JOIN public.taxi_zones z  
-ON t."DOLocationID" = z."LocationID"  
-GROUP BY "Zone"  
+FROM public.taxi_zones pickup
+INNER JOIN public.green_taxi_trips t 
+ON t."PULocationID" = pickup."LocationID"
+INNER JOIN public.taxi_zones dropoff  
+ON t."DOLocationID" = dropoff."LocationID" 
+WHERE pickup."Zone" = 'East Harlem North'
+AND lpep_pickup_datetime BETWEEN '2025-11-01 00:00:00' AND '2025-11-30 23:59:59'
+GROUP BY dropoff."Zone"  
 )  
 SELECT "Zone", max_amount  
 FROM ranked_drop_offs r  
