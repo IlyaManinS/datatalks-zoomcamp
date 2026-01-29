@@ -15,8 +15,8 @@ Answer: 8007
 
 WITH ranked_days AS  
 (  
-SELECT DATE(lpep_pickup_datetime) as date_pickup, MAX(trip_distance) as max_distance,  
-RANK() OVER (ORDER BY MAX(trip_distance) DESC) as trip_rank  
+SELECT DATE(lpep_pickup_datetime) as date_pickup, trip_distance as max_distance,  
+RANK() OVER (ORDER BY trip_distance DESC) as trip_rank  
 FROM public.green_taxi_trips  
 GROUP BY date_pickup HAVING MAX(trip_distance) < 100  
 )  
@@ -54,8 +54,8 @@ Answer: East Harlem North
 
 WITH ranked_drop_offs AS    
 (  
-SELECT dropoff."Zone", MAX(tip_amount) as max_amount,  
-RANK() OVER (ORDER BY MAX(tip_amount) DESC) as zone_rank  
+SELECT dropoff."Zone", tip_amount as max_amount,  
+RANK() OVER (ORDER BY tip_amount DESC) as zone_rank  
 FROM public.taxi_zones pickup  
 INNER JOIN public.green_taxi_trips t   
 ON t."PULocationID" = pickup."LocationID"  
