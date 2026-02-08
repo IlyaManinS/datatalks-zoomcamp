@@ -21,7 +21,7 @@
   },
   
   // Install packages directly + from requirements.txt if it exists
-    "postCreateCommand": "pip install pandas sqlalchemy psycopg2-binary pyarrow click && (pip install -r requirements.txt || echo 'No requirements.txt found') && echo 'PS1=\"> \"' >> ~/.bashrc",
+"postCreateCommand": "pip install pandas sqlalchemy psycopg2-binary pyarrow click google-cloud-storage && (pip install -r requirements.txt || echo 'No requirements.txt found') && echo 'export GOOGLE_APPLICATION_CREDENTIALS=/workspaces/docker-workshop/pipeline/service-account.json' >> ~/.bashrc && echo 'PS1=\"> \"' >> ~/.bashrc",
   
   "customizations": {
     "vscode": {
