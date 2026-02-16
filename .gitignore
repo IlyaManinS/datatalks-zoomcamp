@@ -256,6 +256,9 @@ terraform.rc
 # CSV files
 *.csv
 
+# But allow dbt seeds
+!dbt/seeds/**/*.csv
+
 # Database files
 *.db
 *.sqlite
