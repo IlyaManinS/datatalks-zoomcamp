@@ -263,3 +263,7 @@ terraform.rc
 *.db
 *.sqlite
 ny_taxi_postgres_data/
+.bruin.yml
+logs/runs
+logs/*.log
+*.py[cod]
