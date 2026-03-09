@@ -255,6 +255,7 @@ terraform.rc
 
 # CSV files
 *.csv
+*.csv.gz
 
 # But allow dbt seeds
 !dbt/seeds/**/*.csv
@@ -267,3 +268,6 @@ ny_taxi_postgres_data/
 logs/runs
 logs/*.log
 *.py[cod]
+
+#dbt files
+*profiles.yml
