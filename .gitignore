@@ -271,3 +271,8 @@ logs/*.log
 
 #dbt files
 *profiles.yml
+
+#spark files
+_SUCCESS
+*.crc
+pyspark/data/
