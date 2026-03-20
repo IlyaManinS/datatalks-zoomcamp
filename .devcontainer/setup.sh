@@ -17,7 +17,7 @@ pip install -r requirements.txt || echo 'No requirements.txt found'
 curl -LsSf https://getbruin.com/install/cli | sh
 
 # Shell config
-echo 'export GOOGLE_APPLICATION_CREDENTIALS=/workspaces/docker-workshop/pipeline/service-account.json' >> ~/.bashrc
+echo 'export GOOGLE_APPLICATION_CREDENTIALS=/workspaces/datatalks-zoomcamp/pipeline/service-account.json' >> ~/.bashrc
 echo 'export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-arm64' >> ~/.bashrc
 echo 'export PATH="$JAVA_HOME/bin:$PATH"' >> ~/.bashrc
 echo 'PS1="> "' >> ~/.bashrc
